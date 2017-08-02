@@ -11,6 +11,7 @@
   ],
   "scripts": {
     "prepublishOnly": "npm run build",
+    "start": "webpack-dev-server --content-base public/",
     "lint": "standard",
     "lint:fix": "standard --fix",
     "build": "run-s test babel cjs webpack",
@@ -53,6 +54,7 @@
     "sinon": "^2.3.5",
     "standard": "^10.0.2",
     "webpack": "^3.0.0",
+    "webpack-dev-server": "^2.6.1",
     "xyz": "^2.1.0"
   },
   "dependencies": {}

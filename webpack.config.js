@@ -6,6 +6,7 @@ module.exports = {
   context: __dirname,
   output: {
     path: path.resolve(__dirname, 'dist'),
+    publicPath: '/public/',
     libraryTarget: 'umd',
     filename: 'bundle.js'
   },
