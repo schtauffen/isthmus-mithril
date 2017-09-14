@@ -24,7 +24,7 @@ const Component = {
       }
     }
 
-    Object.keys(vnode.attrs).forEach(key => {
+    Object.keys(vnode.attrs || {}).forEach(key => {
       let atom = vnode.attrs[key]
 
       if (atom && atom.isAtom) {
@@ -64,7 +64,6 @@ const Component = {
 })
 
 const Connect = model => {
-  // the inner function IS the state function...
   const connect = (etc = {}) => component => {
     const result = Object.create(Component)
     result.etc = etc
