@@ -1,2 +1,2 @@
-import * as myLibrary from './'
-export { myLibrary }
+import isthmusMithril from './'
+export default isthmusMithril

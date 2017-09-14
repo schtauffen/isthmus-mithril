@@ -1,8 +1,10 @@
 /* eslint-env jest */
-import noop from 'index'
+import m from 'mithril'
+import connect from 'index'
 
-describe('noop', () => {
-  it('should do nothing', () => {
-    expect(noop()).toBe(undefined)
+describe('connect', () => {
+  it('should return a component', () => {
+    const result = connect()(() => () => m('div', 'abc'))
+    expect(typeof result.view).toEqual('function')
   })
 })
