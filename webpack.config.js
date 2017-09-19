@@ -7,7 +7,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     libraryTarget: 'umd',
-    filename: 'bundle.js'
+    filename: 'mithril.js'
   },
   module: {
     rules: [

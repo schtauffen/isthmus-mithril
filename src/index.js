@@ -14,8 +14,8 @@ const Component = {
     this.atoms = {}
     this.actions = {}
 
-    if (this.model && this.model.isAtom) {
-      this.atoms.model = this.model.view(null)
+    if (this.connectModel && this.connectModel.isAtom) {
+      this.atoms.model = this.connectModel.view(null)
 
       if (this.etc.actions) {
         Object.keys(this.etc.actions).map(key => {
@@ -68,7 +68,7 @@ const Connect = model => {
     const result = Object.create(Component)
     result.etc = etc
     result.component = component
-    Object.defineProperty(result, 'model', {
+    Object.defineProperty(result, 'connectModel', {
       get () { return model }
     })
     return result
