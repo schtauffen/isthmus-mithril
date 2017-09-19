@@ -21,7 +21,7 @@
     "test": "run-s lint test:unit",
     "test:unit": "jest --coverage",
     "test:watch": "jest --coverage --watch",
-    "release": "xyz --repo git@github.com:schtauffen/isthmus-mithril.git --increment"
+    "release": "xyz --repo https://github.com/schtauffen/isthmus-mithril.git --increment"
   },
   "author": "Zach Dahl <z.schtauffen@gmail.com>",
   "license": "ISC",
