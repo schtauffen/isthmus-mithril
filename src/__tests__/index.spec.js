@@ -33,4 +33,31 @@ describe('connect', () => {
 
     expect(() => vnode.state.actions.add()).toThrow()
   })
+
+  it('should bind actions with present over model', () => {
+    const model = Atom({ count: 0 })
+
+    function present ({ type }) {
+      if (type === 'INCREMENT') model.over('count', R.add(1))
+      if (type === 'DECREMENT') model.over('count', R.add(-1))
+    }
+
+    connect.set(model, present)
+
+    const Component = connect({
+      actions: {
+        add: present => () => present({ type: 'INCREMENT' }),
+        sub: present => () => present({ type: 'DECREMENT' })
+      }
+    })(() => ({ model }) => model.get('count'))
+
+    const vnode = {
+      state: Object.create(Component)
+    }
+
+    Component.oninit.call(vnode.state, vnode)
+    expect(Component.view.call(vnode.state, vnode)).toEqual(0)
+    vnode.state.actions.add()
+    expect(Component.view.call(vnode.state, vnode)).toEqual(1)
+  })
 })

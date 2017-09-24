@@ -16,8 +16,14 @@ const Component = {
 
     if (this.connectModel && this.connectModel.isAtom) {
       this.atoms.model = this.connectModel.view(null)
+    }
 
-      if (this.etc.actions) {
+    if (this.etc.actions) {
+      if (this.connectPresent && typeof this.connectPresent === 'function') {
+        Object.keys(this.etc.actions).map(key => {
+          this.actions[key] = this.etc.actions[key](this.connectPresent)
+        })
+      } else if (this.atoms.model && this.atoms.model.isAtom) {
         Object.keys(this.etc.actions).map(key => {
           this.actions[key] = this.etc.actions[key](this.atoms.model)
         })
@@ -63,20 +69,28 @@ const Component = {
   }
 })
 
-const Connect = model => {
+const Connect = (model, present) => {
   const connect = (etc = {}) => component => {
     const result = Object.create(Component)
     result.etc = etc
     result.component = component
-    Object.defineProperty(result, 'connectModel', {
-      get () { return model }
+    Object.defineProperties(result, {
+      connectModel: {
+        get () { return model }
+      },
+      connectPresent: {
+        get () { return present }
+      }
     })
     return result
   }
 
   connect.of = Connect
   connect.get = () => model
-  connect.set = pModel => { model = pModel }
+  connect.set = function (pModel, pPresent) {
+    if (arguments.length > 0) model = pModel
+    if (arguments.length > 1) present = pPresent
+  }
 
   return connect
 }
